@@ -1,44 +1,54 @@
 # Warp Clicker 🚀
 
-**Warp Clicker**, oyuncuların boyutlar arası devasa enerji üretimi yaptığı ve sınırları aştığı evrensel bir idle-clicker (tıklama) oyunudur! Mobil odaklı olarak tasarlanmış, akıcı animasyonlar ve derinlemesine geliştirme sistemleri barındıran bu oyun; Base Mainnet ile web3 entegrasyonu da sağlayarak oyun içi başarına blokzincir üzerinden gerçek bir değer kazandırıyor.
+**Warp Clicker** is a deeply engaging, fast-paced idle-clicker game embedded with rich cyberpunk aesthetics and a mobile-first philosophy. Players step into the role of a Warp Engineer, generating massive "Warp Energy" to unlock dimensions, build vast interstellar infrastructure, and submit verified achievements on-chain.
 
-## 🌟 Özellikler
+## 🌟 Overview & Key Features
 
-- **Mükemmel Idle Clicker Deneyimi:** Ekrana dokunarak "Warp Energy" üretin, kombo çarpanlarını tutturarak enerji patlamaları yaşayın.
-- **Sürekli Gelişim:** Kazandığınız enerjiyi Quantum Relay, Dimensional Gate, Dyson Lattice ve Singularity Pump gibi ileri teknoloji altyapılarına harcayarak kapasitenizi katlayın.
-- **Çevrimdışı Gelir (Offline Earnings):** Oyunda değilken bile sistemleriniz enerji üretmeye devam eder. Geri döndüğünüzde hasılatınızı toplayın.
-- **Prestige & Boyut Atlatımı (Dimensional Collapse):** Ulaştığınız sonsuzluk noktasında evreni sıfırlayarak kalıcı prestij çarpanları kazanın ve yeni boyutların kilidini açın. Özel "Artifact"lar keşfedin.
-- **Base Mainnet & Web3:** Cüzdanınızı bağlayarak skorlarınızı zincir üzerinde (on-chain) kayıt altına alın. Trustless AI Agent destekli akıllı "Orchestrator" kontrat bağlantıları.
-- **ERC-8004 & ERC-8021:** Otomatik AI agent iletişimi (A2A), MCP (Model Context Protocol) adaptasyonlu API'ler. 
+- **Satisfying Idle Gameplay:** Tap the Warp Core to generate energy, rack up combo multipliers, and unleash massive energy bursts.
+- **Deep Progression System:** Invest energy in powerful infrastructure—Quantum Relays, Dimensional Gates, Dyson Lattices, and Singularity Pumps.
+- **Dimensional Collapse (Prestige):** Reset your empire to gain permanent multipliers, unlock deeper dimensions, and discover rare artifacts.
+- **Offline Earnings:** Your warp infrastructure continues to harvest energy even when you're away.
+- **On-Chain Integration:** Connect to the Web3 ecosystem (Base Mainnet) using SIWE (Sign-In with Ethereum) to record your highest scores securely on a hybrid leaderboard.
 
-## 🛠️ Teknolojiler
+## 🤖 AI Agent & MCP Capabilities
 
-- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS (v4), Framer Motion
-- **Backend:** Express API, Server-Side MCP endpoints, Vercel Serverless Ready
-- **Web3:** Wagmi, Viem (Base Mainnet)
-- **State Management:** Zustand (Persisted)
+Warp Clicker supports the **Model Context Protocol (MCP)** and acts as a host platform for Trustless Agents (ERC-8004).
 
-## 📡 Bot/Agent Entegrasyonu (MCP)
+- **Host Agent:** *Warp Clicker Orchestrator*
+- **Capabilities:** Click automation, warp mechanics, idle progression, multi-click management, and efficient farming orchestration.
+- **MCP Endpoint:** Active execution interfaces for interacting with the game state programmatically.
+- **Registration:** Adheres to standard EIP-8004 registration protocols.
 
-Bu depo, oyun üzerinde dış müdahalelere ve karmaşık operasyonlara olanak tanıyan bir "Warp Clicker Orchestrator" barındırır.
-`/.well-known/agent-card.json` ve `/api/mcp` endpointleri sayesinde ERC-8004 standartlarında başka bir akıllı ajanın bu platforma bağlanıp görev alması sağlanmıştır.
+## 💻 Tech Stack
 
-## 🚀 Geliştirme (Local)
+- **Frontend:** React 19, TypeScript, Tailwind CSS (v4), Framer Motion
+- **Web3 Ecosystem:** Wagmi, Viem (Targeting Base)
+- **State Management:** Zustand (with Persistence)
+- **API Interfaces:** Next.js 14 App Router formatting (for MCP/Agent endpoints)
 
-**Kurulum:**
+## 🚀 How to Run Locally
 
-```bash
-npm install
-```
+1. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
 
-**Çalıştırma:**
+2. **Start the Development Server:**
+   ```bash
+   npm run dev
+   ```
 
-```bash
-npm run dev
-```
+3. **Build for Production:**
+   ```bash
+   npm run build
+   ```
 
-(Geliştirme sunucusu `http://localhost:3000` portunda çalışacaktır.)
+## 🔗 Integrating the MCP Agent
 
-## 📝 Notlar
+If you are running an AI orchestrator and want to connect to the Warp Clicker MCP endpoints:
+- **Agent Discovery Card:** Available at `/.well-known/agent-card.json`
+- **Main Agent Control:** `/api/agent`
+- **Model Context Protocol:** Send JSON-RPC formatted payloads to `/api/mcp` for automation commands and state queries.
 
-Güvenliğe ve şeffaflığa çok önem veriyoruz. Repoda yer alan environment file örnekleri gizli private key verisi içermez. Test aşamalarında da kendi "dummy" (test) donelerinizi kullanmanız önerilir. Cüzdanlarınızı her zaman güvenilir ortamlarda imzalayın.
+---
+*Note: Ensure you are operating within a safe environment when testing web3 features. No private keys or secret credentials are required to launch the game locally.*
