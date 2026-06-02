@@ -1,5 +1,17 @@
 import { NextResponse } from 'next/server';
 
+function handleCors() {
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  };
+}
+
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: handleCors() });
+}
+
 export async function GET() {
   return NextResponse.json({
     protocol: "MCP",
@@ -9,17 +21,22 @@ export async function GET() {
     description: "Active MCP server for Warp Clicker Orchestrator Agent",
     capabilities: ["click-automation", "warp-mechanics", "idle-progression", "efficient-farming"],
     timestamp: new Date().toISOString()
-  });
+  }, { headers: handleCors() });
 }
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // MCP initialization and capabilities check
+    const mcpResponse = (result: any) => NextResponse.json({
+      jsonrpc: "2.0",
+      id: body.id,
+      result
+    }, { headers: handleCors() });
+
     if (body.method === 'initialize') {
-      return NextResponse.json({
-        protocolVersion: "1.0.0",
+      return mcpResponse({
+        protocolVersion: "2024-11-05",
         capabilities: {
           tools: {},
           resources: {},
@@ -32,9 +49,8 @@ export async function POST(req: Request) {
       });
     }
 
-    // Tools List
     if (body.method === 'tools/list') {
-      return NextResponse.json({
+      return mcpResponse({
         tools: [
           { 
             name: "get_race_status", 
@@ -65,38 +81,37 @@ export async function POST(req: Request) {
       });
     }
 
-    // Tools Call
     if (body.method === 'tools/call') {
       const toolName = body.params?.name;
-      return NextResponse.json({
-        status: "success",
-        tool: toolName,
-        message: `Executed tool: ${toolName}`,
-        result: {
-          success: true,
-          timestamp: new Date().toISOString()
-        }
+      return mcpResponse({
+        content: [
+          {
+            type: "text",
+            text: `Executed tool: ${toolName}. Success: true. Timestamp: ${new Date().toISOString()}`
+          }
+        ]
       });
     }
 
-    // Prompts List
     if (body.method === 'prompts/list') {
-      return NextResponse.json({ prompts: [] });
+      return mcpResponse({ prompts: [] });
     }
 
-    // Resources List
     if (body.method === 'resources/list') {
-      return NextResponse.json({ resources: [] });
+      return mcpResponse({ resources: [] });
     }
 
-    return NextResponse.json({
-      status: "success",
-      message: "MCP command received",
-      agent: "Warp Clicker Orchestrator",
-      receivedAt: new Date().toISOString(),
-      payload: body
-    });
+    // Default response for unhandled MCP method
+    return NextResponse.json({ 
+      jsonrpc: "2.0", 
+      error: { code: -32601, message: `Method ${body.method} not found` }, 
+      id: body.id || null
+    }, { status: 404, headers: handleCors() });
   } catch (error) {
-    return NextResponse.json({ error: "Invalid MCP request" }, { status: 400 });
+    return NextResponse.json({ 
+      jsonrpc: "2.0", 
+      error: { code: -32700, message: "Parse error" }, 
+      id: null 
+    }, { status: 400, headers: handleCors() });
   }
 }

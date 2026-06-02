@@ -36,6 +36,28 @@
     "auto-clicker-orchestration",
     "mcp-command-execution"
   ],
+  "skills": [
+    {
+      "name": "get_race_status",
+      "description": "Get the current race or dimensional warp status"
+    },
+    {
+      "name": "start_race",
+      "description": "Start a new race or dimension"
+    },
+    {
+      "name": "get_leaderboard",
+      "description": "Get the on-chain leaderboard"
+    },
+    {
+      "name": "optimize_speed",
+      "description": "Optimize for maximum speed and energy generation"
+    },
+    {
+      "name": "get_track_info",
+      "description": "Get track or dimension multiplier info"
+    }
+  ],
   "supportedChains": ["eip155:8453"],
   "active": true,
   "status": "online"
