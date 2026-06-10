@@ -18,10 +18,10 @@ export function Web3Panel() {
   const handleSayGM = () => {
     // A simple zero-value transaction with ERC-8021 payload embedded
     // The user provided the builder code 'bc_qs0w3koa' in the prompt
-    const dataPayload = createERC8021Attribution('bc_qs0w3koa', 'SayGM');
+    const dataPayload = createERC8021Attribution('[BUILDER_CODE]', '[ATTRIBUTION_CODE]');
     
     sendTransaction({
-      to: address, // Send to self as a mock "ping" on chain or a designated contract
+      to: '0xcD0dd3716C5561De47a24949335dF8a8CD8F71a3', // Say GM contract address
       value: BigInt(0),
       data: dataPayload as Hex,
     });

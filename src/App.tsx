@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { WagmiProvider } from 'wagmi';
+import { WagmiProvider, useAccount, useSendTransaction } from 'wagmi';
+import { createERC8021Attribution } from './lib/erc8021';
+import { Hex } from 'viem';
 import { wagmiConfig } from './config/wagmi';
 import { useGameStore } from './store/gameStore';
 import { WarpCore } from './components/WarpCore';
 import { UpgradesPanel } from './components/UpgradesPanel';
 import { PrestigePanel } from './components/PrestigePanel';
 import { Web3Panel } from './components/Web3Panel';
-import { Activity, Zap, Network, Globe } from 'lucide-react';
+import { Activity, Zap, Network, Globe, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 const queryClient = new QueryClient();
@@ -16,6 +18,18 @@ function GameContent() {
   const [showTitle, setShowTitle] = useState(true);
   const [activeTab, setActiveTab] = useState<'core' | 'upgrades' | 'prestige' | 'web3'>('core');
   const { tickPassive, claimOfflineEarnings, resetCombo, combo } = useGameStore();
+
+  const { isConnected } = useAccount();
+  const { sendTransaction } = useSendTransaction();
+
+  const sendGMTransaction = () => {
+    const dataPayload = createERC8021Attribution('[BUILDER_CODE]', '[ATTRIBUTION_CODE]');
+    sendTransaction({
+      to: '0xcD0dd3716C5561De47a24949335dF8a8CD8F71a3',
+      value: BigInt(0),
+      data: dataPayload as Hex,
+    });
+  };
 
   useEffect(() => {
     // Process offline earnings on mount
@@ -104,9 +118,15 @@ function GameContent() {
           </h1>
           <p className="text-[10px] text-[#00f2ff] font-mono tracking-widest uppercase opacity-70">Warp-Engine-v2.0.4</p>
         </div>
-        <button className="px-4 py-1.5 bg-white/5 hover:bg-white/10 border border-[#00f2ff]/30 rounded-full text-[10px] font-bold text-[#00f2ff] tracking-widest uppercase transition-all">
-          GM
-        </button>
+        {isConnected && (
+          <button 
+            onClick={sendGMTransaction}
+            className="px-3 py-2 rounded-lg bg-[#E8A020]/20 hover:bg-[#E8A020]/30 border border-[#E8A020]/40 text-[#E8A020] transition-colors flex items-center gap-2 font-['Cinzel'] text-xs font-bold"
+          >
+            <Sun className="w-4 h-4" />
+            GM
+          </button>
+        )}
       </header>
 
       {/* Main Content Area */}
