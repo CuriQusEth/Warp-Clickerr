@@ -12,9 +12,12 @@ export default function handler(req, res) {
       protocol: "MCP",
       version: "1.0.0",
       name: "Warp Clicker MCP Endpoint",
+      network: "Base Mainnet (Denim 200ms)",
+      chainId: 8453,
+      blockTime: "200ms",
       status: "active",
-      description: "Active MCP server for Warp Clicker Orchestrator Agent",
-      capabilities: ["click-automation", "warp-mechanics", "idle-progression", "efficient-farming"],
+      description: "Active MCP server for Warp Clicker Orchestrator Agent on Base Mainnet Denim",
+      capabilities: ["click-automation", "warp-mechanics", "idle-progression", "efficient-farming", "denim-200ms-blocks"],
       timestamp: new Date().toISOString()
     });
   }

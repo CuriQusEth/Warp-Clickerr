@@ -43,10 +43,37 @@ export function Web3Panel() {
 
   return (
     <div className="flex-1 overflow-y-auto p-4 space-y-8 custom-scrollbar pb-24">
+      {/* Network Header with Denim Upgrade Badge */}
       <div className="space-y-4">
-        <div className="text-[10px] uppercase font-bold text-gray-500 tracking-widest border-b border-[#2a2a4a] pb-2 flex justify-between">
-          <span>Base Mainnet</span>
-          <span className="text-[#00f2ff]">Network</span>
+        <div className="text-[10px] uppercase font-bold text-gray-500 tracking-widest border-b border-[#2a2a4a] pb-2 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <span className="text-white font-bold">Base Mainnet</span>
+            <span className="text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded font-mono font-bold">DENIM 200MS</span>
+          </div>
+          <span className="text-[#00f2ff] font-mono text-[9px] flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            CANONICAL
+          </span>
+        </div>
+
+        {/* Denim Telemetry Card */}
+        <div className="bg-[#0a0a1a] border border-[#2a2a4a] rounded-xl p-3 grid grid-cols-2 gap-2 text-[10px] font-mono">
+          <div className="bg-white/5 p-2 rounded-lg border border-white/5">
+            <div className="text-gray-400 text-[8px] uppercase tracking-wider">Block Time</div>
+            <div className="text-[#00f2ff] font-bold text-xs">200ms Native</div>
+          </div>
+          <div className="bg-white/5 p-2 rounded-lg border border-white/5">
+            <div className="text-gray-400 text-[8px] uppercase tracking-wider">Protocol Upgrade</div>
+            <div className="text-emerald-400 font-bold text-xs">Denim (Nov 2026)</div>
+          </div>
+          <div className="bg-white/5 p-2 rounded-lg border border-white/5">
+            <div className="text-gray-400 text-[8px] uppercase tracking-wider">Chain ID / RPC</div>
+            <div className="text-white truncate">8453 • mainnet.base.org</div>
+          </div>
+          <div className="bg-white/5 p-2 rounded-lg border border-white/5">
+            <div className="text-gray-400 text-[8px] uppercase tracking-wider">Flashblocks State</div>
+            <div className="text-gray-400 truncate">Retired • Full Canonical</div>
+          </div>
         </div>
         
         {!isConnected ? (
@@ -54,13 +81,13 @@ export function Web3Panel() {
             onClick={() => connect({ connector: injected() })}
             className="w-full bg-white/5 hover:bg-[#00f2ff]/10 text-white hover:text-[#00f2ff] text-xs font-black uppercase tracking-tighter py-4 rounded-xl border border-white/10 hover:border-[#00f2ff]/30 transition-all shadow-[0_0_15px_rgba(0,242,255,0.05)]"
           >
-            Connect Wallet
+            Connect Wallet (Base Mainnet)
           </button>
         ) : (
           <div className="space-y-4 bg-white/5 p-4 rounded-xl border border-white/10">
              <div className="flex items-center justify-between border-b border-white/5 pb-3">
                <div className="flex items-center gap-2">
-                 <div className="w-2 h-2 rounded-full bg-[#00f2ff] shadow-[0_0_10px_#00f2ff] animate-pulse" />
+                 <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_#10b981] animate-pulse" />
                  <span className="font-mono text-xs text-gray-300">
                    {address?.slice(0, 6)}...{address?.slice(-4)}
                  </span>
@@ -74,17 +101,17 @@ export function Web3Panel() {
                 <button
                   onClick={handleSayGM}
                   disabled={isPending}
-                  className="w-full bg-white/5 hover:bg-white/10 text-white font-bold text-xs py-3 rounded-xl border border-white/10 transition-colors uppercase tracking-widest"
+                  className="w-full bg-white/5 hover:bg-white/10 text-white font-bold text-xs py-3 rounded-xl border border-white/10 transition-colors uppercase tracking-widest flex items-center justify-center gap-2"
                 >
-                  {isPending ? 'Confirming...' : 'Say GM (On-Chain)'}
+                  {isPending ? 'Confirming in 200ms block...' : 'Say GM (On-Chain Base)'}
                 </button>
-                {isSuccess && <p className="text-[10px] text-[#00f2ff] text-center font-mono uppercase tracking-widest">Transaction Sent!</p>}
+                {isSuccess && <p className="text-[10px] text-emerald-400 text-center font-mono uppercase tracking-widest">Included in 200ms Canonical Block!</p>}
 
                 <button
                   onClick={handleRecordScore}
                   className="w-full bg-[#7000ff] text-white text-[11px] font-black uppercase tracking-tighter py-3 rounded-xl hover:shadow-[0_0_20px_rgba(112,0,255,0.5)] transition-all active:scale-95 mt-4"
                 >
-                  Record Empire on-chain
+                  Record Empire on-chain (SIWE)
                 </button>
                 {leaderboardStatus && <p className="text-[10px] text-[#00f2ff] text-center font-mono uppercase tracking-widest mt-2">{leaderboardStatus}</p>}
              </div>

@@ -81,20 +81,23 @@ export function PrestigePanel() {
 
       {prestigeLevel > 0 && isConnected && (
         <div className="w-full max-w-sm space-y-3 p-4 bg-[#E8A020]/10 border border-[#E8A020]/30 rounded-xl mb-4">
-          <div className="text-[10px] text-center font-bold text-[#E8A020] uppercase tracking-widest mb-2">Prestige Achieved</div>
+          <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest mb-2">
+            <span className="text-[#E8A020]">Prestige Achieved</span>
+            <span className="text-[9px] font-mono text-emerald-400 bg-emerald-500/20 px-1 py-0.5 rounded border border-emerald-500/30">Base Denim 200ms</span>
+          </div>
           <button
             onClick={handleSayGM}
             disabled={isPending}
             className="w-full bg-[#E8A020]/20 hover:bg-[#E8A020]/30 text-[#E8A020] font-bold text-xs py-3 rounded-lg border border-[#E8A020]/40 transition-colors uppercase tracking-widest flex items-center justify-center gap-2"
           >
-            {isPending ? 'Confirming...' : 'Say GM (On-Chain)'}
+            {isPending ? 'Confirming in 200ms block...' : 'Say GM (On-Chain Base)'}
           </button>
           
           <button
             onClick={handleRecordScore}
             className="w-full bg-[#7000ff]/20 hover:bg-[#7000ff]/40 border border-[#7000ff]/50 text-[#00f2ff] text-xs font-bold uppercase tracking-widest py-3 rounded-lg transition-all"
           >
-            Record This Empire on-chain
+            Record This Empire on-chain (SIWE)
           </button>
           {leaderboardStatus && <p className="text-[10px] text-[#00f2ff] text-center font-mono uppercase tracking-widest">{leaderboardStatus}</p>}
         </div>

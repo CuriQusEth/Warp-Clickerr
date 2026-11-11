@@ -12,6 +12,8 @@ export default function handler(req, res) {
       name: "Warp Clicker Orchestrator",
       status: "active",
       platform: "Warp Clicker",
+      network: "Base Mainnet (Denim Upgrade - 200ms Canonical Blocks)",
+      chainId: 8453,
       version: "1.0.0"
     });
   }

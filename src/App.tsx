@@ -116,7 +116,11 @@ function GameContent() {
           <h1 className="font-display font-black text-xl italic tracking-tighter uppercase text-white">
             WARP CLICKER
           </h1>
-          <p className="text-[10px] text-[#00f2ff] font-mono tracking-widest uppercase opacity-70">Warp-Engine-v2.0.4</p>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className="text-[9px] text-[#00f2ff] font-mono tracking-widest uppercase opacity-80">Base Mainnet</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[8px] font-mono font-bold uppercase bg-emerald-500/20 text-emerald-400 px-1 py-0.2 rounded border border-emerald-500/30">Denim 200ms</span>
+          </div>
         </div>
         {isConnected && (
           <button 
